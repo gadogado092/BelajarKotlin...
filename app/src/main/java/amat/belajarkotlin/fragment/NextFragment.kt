@@ -1,7 +1,12 @@
-package amat.belajarkotlin
+package amat.belajarkotlin.fragment
 
 
-import android.content.Context
+import amat.belajarkotlin.*
+import amat.belajarkotlin.api.ApiRepository
+import amat.belajarkotlin.detail.DetailActivity
+import amat.belajarkotlin.main.NextAdapter
+import amat.belajarkotlin.main.NextPresenter
+import amat.belajarkotlin.main.NextView
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,7 +15,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.google.gson.Gson
 
 
@@ -23,7 +27,7 @@ import com.google.gson.Gson
  * A simple [Fragment] subclass.
  *
  */
-class NextFragment : Fragment() ,NextView{
+class NextFragment : Fragment() , NextView {
    
 
     override fun showTeamList(data: List<NextTeam>) {
@@ -45,17 +49,17 @@ class NextFragment : Fragment() ,NextView{
         listMatch = view.findViewById(R.id.listNext)
         listMatch.layoutManager = LinearLayoutManager(activity)
         listMatch.setHasFixedSize(true)
-        adapter = NextAdapter(view.context,teams){
+        adapter = NextAdapter(view.context, teams) {
             val intent = Intent(view.context, DetailActivity::class.java)
             var bundle = Bundle()
-            bundle.putParcelable("selected_match",it)
-            intent.putExtra("myBundle",bundle)
+            bundle.putParcelable("selected_match", it)
+            intent.putExtra("myBundle", bundle)
             startActivity(intent)
         }
         listMatch.adapter = adapter
         val request = ApiRepository()
         val gson = Gson()
-        presenter = NextPresenter(this,request,gson)
+        presenter = NextPresenter(this, request, gson)
         presenter.getTeamList()
         super.onCreate(savedInstanceState)
         return view

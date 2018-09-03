@@ -3,9 +3,12 @@ package amat.belajarkotlin
 
 import amat.belajarkotlin.R.array.league
 import amat.belajarkotlin.R.color.colorAccent
+import amat.belajarkotlin.api.ApiRepository
+import amat.belajarkotlin.model.Team
+import amat.belajarkotlin.util.invisible
+import amat.belajarkotlin.util.visible
 import android.R
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
@@ -15,7 +18,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.*
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.abc_activity_chooser_view_list_item.view.*
 
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView

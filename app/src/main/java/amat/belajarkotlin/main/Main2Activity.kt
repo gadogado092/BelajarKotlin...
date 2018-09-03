@@ -1,5 +1,8 @@
-package amat.belajarkotlin
+package amat.belajarkotlin.main
 
+import amat.belajarkotlin.fragment.LastFragment
+import amat.belajarkotlin.fragment.NextFragment
+import amat.belajarkotlin.R
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
