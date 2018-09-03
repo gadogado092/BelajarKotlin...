@@ -1,4 +1,4 @@
-package amat.belajarkotlin
+package amat.belajarkotlin.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

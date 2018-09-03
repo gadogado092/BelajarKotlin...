@@ -1,6 +1,6 @@
 package amat.belajarkotlin.main
 
-import amat.belajarkotlin.NextTeam
+import amat.belajarkotlin.model.NextTeam
 import amat.belajarkotlin.R
 import android.content.Context
 import android.support.v7.widget.RecyclerView

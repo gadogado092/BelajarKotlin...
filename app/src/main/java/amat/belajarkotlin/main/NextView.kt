@@ -1,6 +1,6 @@
 package amat.belajarkotlin.main
 
-import amat.belajarkotlin.NextTeam
+import amat.belajarkotlin.model.NextTeam
 
 interface NextView {
     fun showLoading()

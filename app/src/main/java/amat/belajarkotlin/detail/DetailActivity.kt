@@ -1,7 +1,7 @@
 package amat.belajarkotlin.detail
 
 import amat.belajarkotlin.model.LogoResponse
-import amat.belajarkotlin.NextTeam
+import amat.belajarkotlin.model.NextTeam
 import amat.belajarkotlin.R
 import amat.belajarkotlin.api.ApiRepository
 import amat.belajarkotlin.api.NextDBApi

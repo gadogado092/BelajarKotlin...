@@ -7,6 +7,7 @@ import amat.belajarkotlin.detail.DetailActivity
 import amat.belajarkotlin.main.NextAdapter
 import amat.belajarkotlin.main.NextPresenter
 import amat.belajarkotlin.main.NextView
+import amat.belajarkotlin.model.NextTeam
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
