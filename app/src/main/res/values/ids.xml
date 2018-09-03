@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="club_gambar" type="id" />
+    <item name="club_nama" type="id" />
+    <item name="club_desk" type="id" />
+    <item name="team_badge" type="id" />
+    <item name="team_name" type="id" />
+</resources>
