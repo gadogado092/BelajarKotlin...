@@ -2,6 +2,7 @@ package amat.belajarkotlin.main
 
 import amat.belajarkotlin.model.NextTeam
 import amat.belajarkotlin.R
+import amat.belajarkotlin.dbsqlite.Favorite
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -12,16 +13,16 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class NextAdapter(private val context: Context, private val teams : List<NextTeam>, private val listener: (NextTeam) -> Unit)
-    : RecyclerView.Adapter<NextAdapter.NextViewHolder>() {
+class FavoritetAdapter(private val context: Context, private val favorite : List<Favorite>, private val listener: (Favorite) -> Unit)
+    : RecyclerView.Adapter<FavoritetAdapter.NextViewHolder>() {
     override fun onBindViewHolder(holder: NextViewHolder, position: Int) {
-        holder.bindItem(teams[position],listener)
+        holder.bindItem(favorite[position],listener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             = NextViewHolder(LayoutInflater.from(context).inflate(R.layout.layoutitemlistnext, parent, false))
 
-    override fun getItemCount(): Int =teams.size
+    override fun getItemCount(): Int =favorite.size
 
 
 
@@ -33,17 +34,17 @@ class NextAdapter(private val context: Context, private val teams : List<NextTea
         private val timeMatch = view.findViewById<TextView>(R.id.timeMatch)
         private val vs = view.findViewById<TextView>(R.id.Vs)
 
-        fun bindItem(teams: NextTeam, listener: (NextTeam) -> Unit){
-            clubAway.text=teams.awayTeam
-            clubHome.text=teams.homeTeam
-            dateMatch.text=parseDateToView(teams.dateMatch.toString())
-            timeMatch.text=teams.timeMatch.toString().substring(0, 5)
+        fun bindItem(favorite: Favorite, listener: (Favorite) -> Unit){
+            clubAway.text=favorite.awayTeam
+            clubHome.text=favorite.homeTeam
+            dateMatch.text=parseDateToView(favorite.dateMatch.toString())
+            timeMatch.text=favorite.timeMatch.toString().substring(0, 5)
 
-            if (teams.awayScore!=null){
-                vs.text=teams.awayScore+"\t\tVS\t\t"+teams.homeScore
+            if (favorite.awayScore!=null){
+                vs.text=favorite.awayScore+"\t\tVS\t\t"+favorite.homeScore
             }
             itemView.setOnClickListener{
-                listener(teams)
+                listener(favorite)
             }
 
         }

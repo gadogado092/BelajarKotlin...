@@ -3,6 +3,7 @@ package amat.belajarkotlin.main
 import amat.belajarkotlin.fragment.LastFragment
 import amat.belajarkotlin.fragment.NextFragment
 import amat.belajarkotlin.R
+import amat.belajarkotlin.fragment.FavoriteFragment
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
@@ -21,6 +22,13 @@ class Main2Activity : AppCompatActivity() {
             }
             R.id.navigation_dashboard -> {
                 val fragment = NextFragment()
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.fragment_container, fragment)
+                fragmentTransaction.commit()
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_favorit -> {
+                val fragment = FavoriteFragment()
                 val fragmentTransaction = supportFragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.fragment_container, fragment)
                 fragmentTransaction.commit()

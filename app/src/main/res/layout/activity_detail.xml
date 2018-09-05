@@ -95,6 +95,14 @@
                     android:textColor="@android:color/black"
                     android:textSize="14sp" />
 
+                <ImageView
+                    android:id="@+id/imageFavorite"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_favorite_border_black_24dp" />
+
             </LinearLayout>
 
             <LinearLayout

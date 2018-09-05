@@ -30,17 +30,16 @@ import java.text.SimpleDateFormat
 import java.time.Duration
 import java.util.*
 
-class DetailActivity : Activity() {
-    private lateinit var match: NextTeam
+class DetailActivityFavorite : Activity() {
+    private lateinit var match: Favorite
     private var isFavorite: Boolean = false
     private lateinit var id: String
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
         val bundle = intent.getBundleExtra("myBundle")
-        match  = bundle.getParcelable<NextTeam>("selected_match") as NextTeam
+        match  = bundle.getParcelable<Favorite>("selected_match") as Favorite
         id= match.idEvent.toString()
         val clubAway = findViewById<TextView>(R.id.awayClub)
         val clubHome = findViewById<TextView>(R.id.homeClub)
@@ -83,7 +82,7 @@ class DetailActivity : Activity() {
                         Favorite.TIME_MATCH to match.timeMatch,
                         Favorite.HOME_SCORE to match.homeScore,
                         Favorite.AWAY_SCORE to match.awayScore
-                        )
+                )
             }
             Toast.makeText(this,"Added to favorite",Toast.LENGTH_SHORT).show()
         }catch (e:SQLiteConstraintException){
