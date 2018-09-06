@@ -4,7 +4,7 @@ import amat.belajarkotlin.BuildConfig
 import android.net.Uri
 
 object NextDBApi {
-    fun getTeams (idLeague: String?): String {
+    fun getNextMatch (idLeague: String?): String {
         return Uri.parse(BuildConfig.BASE_URL).buildUpon()
                 .appendPath("api")
                 .appendPath("v1")
@@ -15,7 +15,7 @@ object NextDBApi {
                 .build()
                 .toString()
     }
-    fun getTeamsLast (idLeague: String?): String {
+    fun getLastMatch (idLeague: String?): String {
         return Uri.parse(BuildConfig.BASE_URL).buildUpon()
                 .appendPath("api")
                 .appendPath("v1")

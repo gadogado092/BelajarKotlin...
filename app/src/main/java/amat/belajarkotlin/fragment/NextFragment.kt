@@ -52,7 +52,7 @@ class NextFragment : Fragment() , NextView {
         listMatch.setHasFixedSize(true)
         adapter = NextAdapter(view.context, teams) {
             val intent = Intent(view.context, DetailActivity::class.java)
-            var bundle = Bundle()
+            val bundle = Bundle()
             bundle.putParcelable("selected_match", it)
             intent.putExtra("myBundle", bundle)
             startActivity(intent)
@@ -61,7 +61,7 @@ class NextFragment : Fragment() , NextView {
         val request = ApiRepository()
         val gson = Gson()
         presenter = NextPresenter(this, request, gson)
-        presenter.getTeamList()
+        presenter.getMatchNext()
         super.onCreate(savedInstanceState)
         return view
     }

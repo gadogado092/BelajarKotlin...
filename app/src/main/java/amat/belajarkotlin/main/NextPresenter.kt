@@ -11,11 +11,11 @@ class NextPresenter (private val view: NextView,
                      private val apiRepository: ApiRepository,
                      private val gson: Gson) {
 
-    fun getTeamList() {
+    fun getMatchNext() {
         view.showLoading()
         doAsync {
             val data = gson.fromJson(apiRepository
-                    .doRequest(NextDBApi.getTeams("4332")),
+                    .doRequest(NextDBApi.getNextMatch("4332")),
                     NextResponse::class.java
             )
 
@@ -25,11 +25,11 @@ class NextPresenter (private val view: NextView,
             }
         }
     }
-    fun getTeamListLast() {
+    fun getMatchLast() {
         view.showLoading()
         doAsync {
             val data = gson.fromJson(apiRepository
-                    .doRequest(NextDBApi.getTeamsLast("4332")),
+                    .doRequest(NextDBApi.getLastMatch("4332")),
                     NextResponse::class.java
             )
 
