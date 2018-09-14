@@ -2,6 +2,7 @@ package amat.belajarkotlin.util
 
 import android.view.View
 
+
 fun View.visible() {
     visibility = View.VISIBLE
 }
@@ -9,3 +10,5 @@ fun View.visible() {
 fun View.invisible() {
     visibility = View.INVISIBLE
 }
+
+

@@ -8,6 +8,8 @@ import amat.belajarkotlin.main.NextAdapter
 import amat.belajarkotlin.main.NextPresenter
 import amat.belajarkotlin.main.NextView
 import amat.belajarkotlin.model.NextTeam
+import amat.belajarkotlin.util.invisible
+import amat.belajarkotlin.util.visible
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -16,6 +18,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import com.google.gson.Gson
 
 
@@ -29,11 +32,11 @@ import com.google.gson.Gson
  *
  */
 class NextFragment : Fragment() , NextView {
-   
 
-    override fun showTeamList(data: List<NextTeam>) {
-        teams.clear()
-        teams.addAll(data)
+
+    override fun showMatchList(data: List<NextTeam>) {
+        match.clear()
+        match.addAll(data)
         adapter.notifyDataSetChanged()
     }
 
@@ -41,16 +44,18 @@ class NextFragment : Fragment() , NextView {
     private lateinit var listMatch: RecyclerView
     private lateinit var presenter: NextPresenter
     private lateinit var adapter: NextAdapter
-    private var teams : MutableList<NextTeam> = mutableListOf()
+    private val match : MutableList<NextTeam> = mutableListOf()
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_next, container, false)
         listMatch = view.findViewById(R.id.listNext)
+        progressBar = view.findViewById(R.id.progressBar)
         listMatch.layoutManager = LinearLayoutManager(activity)
         listMatch.setHasFixedSize(true)
-        adapter = NextAdapter(view.context, teams) {
+        adapter = NextAdapter(view.context, match) {
             val intent = Intent(view.context, DetailActivity::class.java)
             val bundle = Bundle()
             bundle.putParcelable("selected_match", it)
@@ -69,11 +74,11 @@ class NextFragment : Fragment() , NextView {
 
 
     override fun showLoading() {
-
+        progressBar.visible()
     }
 
     override fun hideLoading() {
-
+        progressBar.invisible()
     }
 
 

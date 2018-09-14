@@ -8,6 +8,8 @@ import amat.belajarkotlin.main.NextAdapter
 import amat.belajarkotlin.main.NextPresenter
 import amat.belajarkotlin.main.NextView
 import amat.belajarkotlin.model.NextTeam
+import amat.belajarkotlin.util.invisible
+import amat.belajarkotlin.util.visible
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -16,6 +18,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import com.google.gson.Gson
 
 
@@ -34,12 +37,13 @@ class LastFragment : Fragment(), NextView {
     private lateinit var presenter: NextPresenter
     private lateinit var adapter: NextAdapter
     private var teams : MutableList<NextTeam> = mutableListOf()
-
+    private lateinit var progressBar: ProgressBar
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_last, container, false)
 
+        progressBar = view.findViewById(R.id.progressBar)
         listMatch = view.findViewById(R.id.listLast)
         listMatch.layoutManager = LinearLayoutManager(activity)
         listMatch.setHasFixedSize(true)
@@ -62,14 +66,14 @@ class LastFragment : Fragment(), NextView {
 
 
     override fun showLoading() {
-
+        progressBar.visible()
     }
 
     override fun hideLoading() {
-
+        progressBar.invisible()
     }
 
-    override fun showTeamList(data: List<NextTeam>) {
+    override fun showMatchList(data: List<NextTeam>) {
         teams.clear()
         teams.addAll(data)
         adapter.notifyDataSetChanged()
