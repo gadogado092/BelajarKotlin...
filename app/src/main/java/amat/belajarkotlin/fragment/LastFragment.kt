@@ -2,12 +2,12 @@ package amat.belajarkotlin.fragment
 
 
 import amat.belajarkotlin.*
+import amat.belajarkotlin.adapter.MatchAdapter
 import amat.belajarkotlin.api.ApiRepository
 import amat.belajarkotlin.detail.DetailActivity
-import amat.belajarkotlin.main.NextAdapter
-import amat.belajarkotlin.main.NextPresenter
-import amat.belajarkotlin.main.NextView
-import amat.belajarkotlin.model.NextTeam
+import amat.belajarkotlin.view.*
+import amat.belajarkotlin.model.MatchModel
+import amat.belajarkotlin.presenter.MatchPresenter
 import amat.belajarkotlin.util.invisible
 import amat.belajarkotlin.util.visible
 import android.content.Intent
@@ -30,13 +30,13 @@ import com.google.gson.Gson
  * A simple [Fragment] subclass.
  *
  */
-class LastFragment : Fragment(), NextView {
+class LastFragment : Fragment(), MatchView {
 
-
+    private  var idLeague: String? = null
     private lateinit var listMatch: RecyclerView
-    private lateinit var presenter: NextPresenter
-    private lateinit var adapter: NextAdapter
-    private var teams : MutableList<NextTeam> = mutableListOf()
+    private lateinit var presenter: MatchPresenter
+    private lateinit var adapter: MatchAdapter
+    private var match : MutableList<MatchModel> = mutableListOf()
     private lateinit var progressBar: ProgressBar
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -47,7 +47,7 @@ class LastFragment : Fragment(), NextView {
         listMatch = view.findViewById(R.id.listLast)
         listMatch.layoutManager = LinearLayoutManager(activity)
         listMatch.setHasFixedSize(true)
-        adapter = NextAdapter(view.context, teams) {
+        adapter = MatchAdapter(view.context, match) {
             val intent = Intent(view.context, DetailActivity::class.java)
             val bundle = Bundle()
             bundle.putParcelable("selected_match", it)
@@ -57,9 +57,9 @@ class LastFragment : Fragment(), NextView {
         listMatch.adapter = adapter
         val request = ApiRepository()
         val gson = Gson()
-        presenter = NextPresenter(this, request, gson)
-        presenter.getMatchLast()
-
+        presenter = MatchPresenter(this, request, gson)
+        idLeague = arguments!!.getString("idLeague")
+        presenter.getMatchLast(idLeague)
         return view
     }
 
@@ -73,9 +73,9 @@ class LastFragment : Fragment(), NextView {
         progressBar.invisible()
     }
 
-    override fun showMatchList(data: List<NextTeam>) {
-        teams.clear()
-        teams.addAll(data)
+    override fun showMatchList(data: List<MatchModel>, condition: Boolean) {
+        match.clear()
+        match.addAll(data)
         adapter.notifyDataSetChanged()
     }
 

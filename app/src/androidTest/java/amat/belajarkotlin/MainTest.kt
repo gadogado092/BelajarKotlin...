@@ -1,7 +1,7 @@
 package amat.belajarkotlin
 
 import amat.belajarkotlin.R.id.*
-import amat.belajarkotlin.main.MainActivity
+import amat.belajarkotlin.view.MainActivity
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.Espresso.pressBack
 import android.support.test.espresso.action.ViewActions.click
@@ -26,29 +26,38 @@ class MainTest {
     @Test
     fun testAppBehaviour() {
 
+        Thread.sleep(5000)
         onView(withId(navigation_favorit))
                 .check(matches(isDisplayed()))
         onView(withId(navigation_favorit)).perform(click())
 
-
+        Thread.sleep(5000)
         onView(withId(navigation_next))
                 .check(matches(isDisplayed()))
         onView(withId(navigation_next)).perform(click())
 
+        Thread.sleep(5000)
         onView(withId(listNext))
                 .check(matches(isDisplayed()))
         onView(withId(listNext)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(15))
+        Thread.sleep(5000)
         onView(withId(listNext)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(1))
         onView(withId(listNext)).perform(
                 RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(3, click()))
 
+        Thread.sleep(5000)
         onView(withId(imageFavorite)).check(matches(isDisplayed()))
         onView(withId(imageFavorite)).perform(click())
         pressBack()
 
+        Thread.sleep(5000)
         onView(withId(navigation_favorit))
                 .check(matches(isDisplayed()))
         onView(withId(navigation_favorit)).perform(click())
+
+
+
+
     }
 }
 

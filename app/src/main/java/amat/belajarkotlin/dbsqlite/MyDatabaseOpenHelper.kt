@@ -23,9 +23,29 @@ class MyDatabaseOpenHelper (ctx: Context) : ManagedSQLiteOpenHelper(ctx,"Favorit
                 Favorite.AWAY_TEAM to TEXT,
                 Favorite.DATE_MATCH to TEXT,
                 Favorite.TIME_MATCH to TEXT,
+                Favorite.HOME_SCORE to TEXT,
                 Favorite.AWAY_SCORE to TEXT,
-                Favorite.HOME_SCORE to TEXT
+                Favorite.AWAY_GOALS to TEXT,
+                Favorite.AWAY_GK to TEXT,
+                Favorite.AWAY_MIDFIELD to TEXT,
+                Favorite.AWAY_DEFENSE to TEXT,
+                Favorite.AWAY_FORWARD to TEXT,
+                Favorite.AWAY_SUBTITUTES to TEXT,
+                Favorite.HOME_GOALS to TEXT,
+                Favorite.HOME_GK to TEXT,
+                Favorite.HOME_MIDFIELD to TEXT,
+                Favorite.HOME_DEFENSE to TEXT,
+                Favorite.HOME_FORWARD to TEXT,
+                Favorite.HOME_SUBTITUTES to TEXT
         )
+        db?.createTable(FavoriteTeam.TABLE_FAVORITE, true,
+                FavoriteTeam.ID_TEAM to TEXT,
+                FavoriteTeam.STR_TEAM to TEXT,
+                FavoriteTeam.INT_FORMEDYEAR to TEXT,
+                FavoriteTeam.STR_STADIUM to TEXT,
+                FavoriteTeam.STR_STADIUMTHUMB to TEXT,
+                FavoriteTeam.TEAM_BADGE to TEXT
+                )
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {

@@ -2,12 +2,12 @@ package amat.belajarkotlin.fragment
 
 
 import amat.belajarkotlin.*
-import amat.belajarkotlin.adapter.MatchAdapter
+import amat.belajarkotlin.adapter.TeamsAdapter
 import amat.belajarkotlin.api.ApiRepository
-import amat.belajarkotlin.detail.DetailActivity
+import amat.belajarkotlin.detail.DetailActivityTeam
 import amat.belajarkotlin.view.*
-import amat.belajarkotlin.model.MatchModel
-import amat.belajarkotlin.presenter.MatchPresenter
+import amat.belajarkotlin.model.TeamModel
+import amat.belajarkotlin.presenter.TeamsPresenter
 import amat.belajarkotlin.util.invisible
 import amat.belajarkotlin.util.visible
 import android.content.Intent
@@ -22,7 +22,6 @@ import android.widget.ProgressBar
 import com.google.gson.Gson
 
 
-
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
@@ -31,44 +30,37 @@ import com.google.gson.Gson
  * A simple [Fragment] subclass.
  *
  */
-class NextFragment : Fragment() , MatchView {
+class TeamsFragment : Fragment(), TeamsView {
 
-
-    override fun showMatchList(data: List<MatchModel>, condition: Boolean) {
-        match.clear()
-        match.addAll(data)
-        adapter.notifyDataSetChanged()
-    }
-
-    private var idLeague: String? = null
-    private lateinit var listMatch: RecyclerView
-    private lateinit var presenter: MatchPresenter
-    private lateinit var adapter: MatchAdapter
-    private val match : MutableList<MatchModel> = mutableListOf()
+    private  var idLeague: String? = null
+    private lateinit var listTeams: RecyclerView
+    private lateinit var presenter: TeamsPresenter
+    private lateinit var adapter: TeamsAdapter
+    private var teams : MutableList<TeamModel> = mutableListOf()
     private lateinit var progressBar: ProgressBar
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_next, container, false)
-        listMatch = view.findViewById(R.id.listNext)
+        val view = inflater.inflate(R.layout.fragment_last, container, false)
+
         progressBar = view.findViewById(R.id.progressBar)
-        listMatch.layoutManager = LinearLayoutManager(activity)
-        listMatch.setHasFixedSize(true)
-        adapter = MatchAdapter(view.context, match) {
-            val intent = Intent(view.context, DetailActivity::class.java)
+        listTeams = view.findViewById(R.id.listLast)
+        listTeams.layoutManager = LinearLayoutManager(activity)
+        listTeams.setHasFixedSize(true)
+        adapter = TeamsAdapter(view.context, teams) {
+            val intent = Intent(view.context, DetailActivityTeam::class.java)
             val bundle = Bundle()
             bundle.putParcelable("selected_match", it)
             intent.putExtra("myBundle", bundle)
             startActivity(intent)
         }
-        listMatch.adapter = adapter
+
+        listTeams.adapter = adapter
         val request = ApiRepository()
         val gson = Gson()
-        presenter = MatchPresenter(this, request, gson)
+        presenter = TeamsPresenter(this, request, gson)
         idLeague = arguments!!.getString("idLeague")
-        presenter.getMatchNext(idLeague)
-        super.onCreate(savedInstanceState)
+        presenter.getTeams(idLeague)
         return view
     }
 
@@ -82,6 +74,10 @@ class NextFragment : Fragment() , MatchView {
         progressBar.invisible()
     }
 
-
+    override fun showMatchList(data: List<TeamModel>, condition: Boolean) {
+        teams.clear()
+        teams.addAll(data)
+        adapter.notifyDataSetChanged()
+    }
 
 }

@@ -1,10 +1,11 @@
 package amat.belajarkotlin.detail
 
-import amat.belajarkotlin.model.LogoResponse
-import amat.belajarkotlin.model.NextTeam
+import amat.belajarkotlin.model.TeamsResponse
+
 import amat.belajarkotlin.R
 import amat.belajarkotlin.api.ApiRepository
-import amat.belajarkotlin.api.NextDBApi
+import amat.belajarkotlin.api.MatchApi
+
 import amat.belajarkotlin.dbsqlite.Favorite
 import amat.belajarkotlin.dbsqlite.database
 import android.app.Activity
@@ -16,18 +17,15 @@ import android.widget.Toast
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
-import kotlinx.android.synthetic.main.design_layout_snackbar_include.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
-import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.uiThread
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.time.Duration
 import java.util.*
 
 class DetailActivityFavorite : Activity() {
@@ -43,6 +41,18 @@ class DetailActivityFavorite : Activity() {
         id= match.idEvent.toString()
         val clubAway = findViewById<TextView>(R.id.awayClub)
         val clubHome = findViewById<TextView>(R.id.homeClub)
+        val goalsAway = findViewById<TextView>(R.id.awayGoals)
+        val gkAway = findViewById<TextView>(R.id.awayGk)
+        val midfieldAway = findViewById<TextView>(R.id.awayMidfield)
+        val defenseAway = findViewById<TextView>(R.id.awayDefense)
+        val forwardAway = findViewById<TextView>(R.id.awayForward)
+        val substitutesAway = findViewById<TextView>(R.id.awaySubstitutes)
+        val goalsHome = findViewById<TextView>(R.id.homeGoals)
+        val gkHome = findViewById<TextView>(R.id.homeGk)
+        val midfieldHome = findViewById<TextView>(R.id.homeMidfield)
+        val defenseHome = findViewById<TextView>(R.id.homeDefense)
+        val forwardHome = findViewById<TextView>(R.id.homeForward)
+        val substitutesHome = findViewById<TextView>(R.id.homeSubstitutes)
         val dateMatch =findViewById<TextView>(R.id.dateMatch)
         val timeMatch = findViewById<TextView>(R.id.timeMatch)
         val imageFavorite: ImageView = findViewById<ImageView>(R.id.imageFavorite)
@@ -51,6 +61,20 @@ class DetailActivityFavorite : Activity() {
         getTeamLogoAway(match.awayTeam)
         clubAway.text=match.awayTeam
         clubHome.text=match.homeTeam
+        goalsHome.text=match.homeGoals
+        gkHome.text=match.homeGk
+        midfieldHome.text=match.homeMidfield
+        defenseHome.text=match.homeDefense
+        forwardHome.text=match.homeForward
+        substitutesHome.text=match.homeSubstitutes
+
+        goalsAway.text=match.awayGoals
+        gkAway.text=match.awayGk
+        midfieldAway.text=match.awayMidfield
+        defenseAway.text=match.awayDefense
+        forwardAway.text=match.awayForward
+        substitutesAway.text=match.awaySubstitutes
+
         dateMatch.text=parseDateToView(match.dateMatch.toString())
         timeMatch.text=match.timeMatch.toString().substring(0, 5)
         if (match.awayScore!=null){
@@ -126,13 +150,13 @@ class DetailActivityFavorite : Activity() {
         doAsync {
 
             val data = gson.fromJson(apiRepository
-                    .doRequest(NextDBApi.getTeamsLogo(id)),
-                    LogoResponse::class.java
+                    .doRequest(MatchApi.getTeamsLogo(id)),
+                    TeamsResponse::class.java
             )
 
             uiThread {
 
-                Picasso.get().load(data.teams.get(0).teamBadge).into(homeBadage)
+                Picasso.get().load(data.teams.get(0).strTeamBadge).into(homeBadage)
                 //view.hideLoading()
                 //view.showTeamList(data.events)
             }
@@ -144,13 +168,13 @@ class DetailActivityFavorite : Activity() {
         doAsync {
 
             val data = gson.fromJson(apiRepository
-                    .doRequest(NextDBApi.getTeamsLogo(id)),
-                    LogoResponse::class.java
+                    .doRequest(MatchApi.getTeamsLogo(id)),
+                    TeamsResponse::class.java
             )
 
             uiThread {
 
-                Picasso.get().load(data.teams.get(0).teamBadge).into(awayBadage)
+                Picasso.get().load(data.teams.get(0).strTeamBadge).into(awayBadage)
 
             }
         }

@@ -3,37 +3,37 @@ package amat.belajarkotlin.api
 import amat.belajarkotlin.BuildConfig
 import android.net.Uri
 
-object NextDBApi {
-    fun getNextMatch (idLeague: String?): String {
+object TeamsApi {
+    fun getTeams(league: String?): String {
         return Uri.parse(BuildConfig.BASE_URL).buildUpon()
                 .appendPath("api")
                 .appendPath("v1")
                 .appendPath("json")
                 .appendPath(BuildConfig.TSDB_API_KEY)
-                .appendPath("eventsnextleague.php")
-                .appendQueryParameter("id",idLeague)
+                .appendPath("search_all_teams.php")
+                .appendQueryParameter("l", league)
                 .build()
                 .toString()
     }
-    fun getLastMatch (idLeague: String?): String {
+    fun getPlayers(team: String?): String {
         return Uri.parse(BuildConfig.BASE_URL).buildUpon()
                 .appendPath("api")
                 .appendPath("v1")
                 .appendPath("json")
                 .appendPath(BuildConfig.TSDB_API_KEY)
-                .appendPath("eventspastleague.php")
-                .appendQueryParameter("id",idLeague)
+                .appendPath("searchplayers.php")
+                .appendQueryParameter("t", team)
                 .build()
                 .toString()
     }
-    fun getTeamsLogo (idLogo: String?): String {
+    fun searchTeam(team: String?): String {
         return Uri.parse(BuildConfig.BASE_URL).buildUpon()
                 .appendPath("api")
                 .appendPath("v1")
                 .appendPath("json")
                 .appendPath(BuildConfig.TSDB_API_KEY)
                 .appendPath("searchteams.php")
-                .appendQueryParameter("t",idLogo)
+                .appendQueryParameter("t", team)
                 .build()
                 .toString()
     }
