@@ -5,5 +5,5 @@ import amat.belajarkotlin.model.TeamModel
 interface TeamsView {
     fun showLoading()
     fun hideLoading()
-    fun showMatchList(data: List<TeamModel>,condition:Boolean)
+    fun showMatchList(data: List<TeamModel>?, condition:Boolean)
 }

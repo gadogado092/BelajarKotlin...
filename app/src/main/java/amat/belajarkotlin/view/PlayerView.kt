@@ -6,5 +6,5 @@ import amat.belajarkotlin.model.PlayerModel
 interface PlayerView {
     fun showLoading()
     fun hideLoading()
-    fun showMatchList(data: List<PlayerModel>)
+    fun showMatchList(data: List<PlayerModel>?)
 }

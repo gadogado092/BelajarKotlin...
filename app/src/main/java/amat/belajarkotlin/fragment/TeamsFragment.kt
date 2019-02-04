@@ -74,9 +74,11 @@ class TeamsFragment : Fragment(), TeamsView {
         progressBar.invisible()
     }
 
-    override fun showMatchList(data: List<TeamModel>, condition: Boolean) {
+    override fun showMatchList(data: List<TeamModel>?, condition: Boolean) {
         teams.clear()
-        teams.addAll(data)
+        if (data != null) {
+            teams.addAll(data)
+        }
         adapter.notifyDataSetChanged()
     }
 

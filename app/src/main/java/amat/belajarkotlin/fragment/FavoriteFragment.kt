@@ -23,7 +23,8 @@ class FavoriteFragment : Fragment() {
     private lateinit var listFavorite: RecyclerView
     private lateinit var adapter: FavoritetAdapter
     private var favorites: MutableList<Favorite> = mutableListOf()
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+    
+	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view =inflater.inflate(R.layout.fragment_favorite, container, false)
         adapter= FavoritetAdapter(view.context, favorites) {

@@ -99,9 +99,11 @@ class DetailActivityTeamFavorite : AppCompatActivity(), PlayerView {
         progressBar.invisible()
     }
 
-    override fun showMatchList(data: List<PlayerModel>) {
+    override fun showMatchList(data: List<PlayerModel>?) {
         player.clear()
-        player.addAll(data)
+        if (data != null) {
+            player.addAll(data)
+        }
         adapter.notifyDataSetChanged()
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

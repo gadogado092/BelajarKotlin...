@@ -109,10 +109,12 @@ class SearchTeamActivity : AppCompatActivity(),TeamsView {
         listTeams.visible()
     }
 
-    override fun showMatchList(data: List<TeamModel>, condition: Boolean) {
+    override fun showMatchList(data: List<TeamModel>?, condition: Boolean) {
         if (condition){
             teams.clear()
-            teams.addAll(data)
+            if (data != null) {
+                teams.addAll(data)
+            }
             adapter.notifyDataSetChanged()
         }else{
             Toast.makeText(applicationContext,"Empty List", Toast.LENGTH_SHORT).show()

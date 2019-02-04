@@ -34,9 +34,11 @@ import com.google.gson.Gson
 class NextFragment : Fragment() , MatchView {
 
 
-    override fun showMatchList(data: List<MatchModel>, condition: Boolean) {
+    override fun showMatchList(data: List<MatchModel>?, condition: Boolean) {
         match.clear()
-        match.addAll(data)
+        if (data != null) {
+            match.addAll(data)
+        }
         adapter.notifyDataSetChanged()
     }
 

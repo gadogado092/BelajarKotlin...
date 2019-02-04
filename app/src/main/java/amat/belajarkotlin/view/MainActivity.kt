@@ -303,10 +303,12 @@ class MainActivity : AppCompatActivity(),MatchView{
         listMatch.visible()
     }
 
-    override fun showMatchList(data: List<MatchModel>, condition: Boolean) {
+    override fun showMatchList(data: List<MatchModel>?, condition: Boolean) {
             if (condition){
                 match.clear()
-                match.addAll(data)
+                if (data != null) {
+                    match.addAll(data)
+                }
                 adapter.notifyDataSetChanged()
             }else{
                 Toast.makeText(applicationContext,"Empty List",Toast.LENGTH_SHORT).show()

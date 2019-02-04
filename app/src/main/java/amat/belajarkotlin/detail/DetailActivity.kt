@@ -170,7 +170,7 @@ class DetailActivity : Activity() {
 
             uiThread {
 
-                Picasso.get().load(data.teams.get(0).strTeamBadge).into(homeBadage)
+                Picasso.get().load(data.teams?.get(0)?.strTeamBadge).into(homeBadage)
                 //view.hideLoading()
                 //view.showTeamList(data.events)
             }
@@ -188,7 +188,7 @@ class DetailActivity : Activity() {
 
             uiThread {
 
-                Picasso.get().load(data.teams.get(0).strTeamBadge).into(awayBadage)
+                Picasso.get().load(data.teams?.get(0)?.strTeamBadge).into(awayBadage)
 
             }
         }
